@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Counter } from './components/Counter';
 import { Text } from './components/Text';
@@ -7,6 +6,9 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [invites, setInvites] = useState([]);
+
   useEffect(() => {
     const fetchUsers = async () => {
 
@@ -15,16 +17,29 @@ function App() {
           'x-api-key': 'reqres_472be74aa8924e94b91744bdf45b5875',
           'Content-Type': 'application/json',
         }
-      }).then(res => res.json()).then(json => {setUsers(json.data)});
+      }).then(res => res.json()).then(json => { setUsers(json.data) });
     };
     fetchUsers();
   }, []);
-  
+
+  const onChangeValue = (e) => {
+    setSearchValue(e.target.value);
+  }
+
+  const onClickInvite = (id) => {
+    if (invites.includes(id)) setInvites(prev => prev.filter(ch => ch !== id));
+    else setInvites(prev => [...prev, id]);
+  }
+
   return (
     <div className='main'>
       {/* <Counter/> */}
       {/* <Text/> */}
-      <Users users={users}/>
+      <Users
+        users={users}
+        searchValue={searchValue} onChangeValue={onChangeValue}
+        invites={invites} onClickInvite={onClickInvite}
+      />
     </div>
   );
 }

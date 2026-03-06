@@ -65,3 +65,14 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.button>b{
+    font-size: 20px;
+    text-align: center;
+    width: 30px;
+    border: solid 2px #CCC;
+    padding-bottom: 4px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 4px 1px #C1C1C1;
+    cursor: pointer;
+}
