@@ -9,30 +9,14 @@ function App() {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchUsers = async () => {
-      const payload = {
-        "project_slug": "<project_slug>",
-        "project_id": "<project_id>",
-        "source_type": "collection",
-        "source_id": "<collection_slug>",
-        "event": "record.created",
-        "action_type": "webhook",
-        "action_config": {
-          "url": "https://example.com/webhook"
-        }
-      };
 
-      const response = await fetch('https://reqres.in/triggers', {
-        method: 'POST',
+      const response = await fetch('https://reqres.in/api/users?page=2', {
         headers: {
           'x-api-key': 'reqres_472be74aa8924e94b91744bdf45b5875',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const json = await response.json();
-      setUsers(json);
+        }
+      }).then(res => res.json()).then(json => {setUsers(json.data)});
     };
-
     fetchUsers();
   }, []);
   

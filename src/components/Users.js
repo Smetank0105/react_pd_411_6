@@ -10,10 +10,8 @@ export function Users({ users }) {
             <div>
                 <ul className='users-list'>
                     {
-                        users.map((obj) => (
-                            <User key={Object.id} {...obj} />
-                        ))}
-
+                        users.map(obj => (<User key={obj.id} {...obj} />))
+                    }
                 </ul>
             </div>
             <button className='send-invite-btn'>Invite</button>
